@@ -32,6 +32,7 @@
             max-width: 500px;
             width: 100%;
             text-align: center;
+            position: relative;
         }
 
         h1 {
@@ -261,6 +262,14 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
+
+        .version {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
@@ -300,6 +309,7 @@
             </div>
         </div>
         <a href="index.html" class="app-link">🏠 Home</a>
+        <div class="version">v1.0.1</div>
     </div>
 
     <script>
