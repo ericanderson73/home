@@ -76,37 +76,63 @@
             <input type="number" id="currentAverage" placeholder="e.g., 85">
         </div>
         <div class="input-group">
-            <label for="testGrade">Test Grade</label>
-            <input type="number" id="testGrade" placeholder="e.g., 92">
+            <label for="testGrade">Test Grade: <span id="testGradeVal">50</span></label>
+            <input type="range" id="testGrade" min="1" max="100" value="50">
         </div>
         <div class="input-group">
-            <label for="testWeight">Test Weight (%)</label>
-            <input type="number" id="testWeight" placeholder="e.g., 20">
+            <label for="testWeight">Test Weight (%): <span id="testWeightVal">50</span></label>
+            <input type="range" id="testWeight" min="1" max="100" value="50">
         </div>
         <button id="calculateBtn">Calculate</button>
         <div id="result"></div>
+        <div class="input-group">
+            <label for="newAverage">New Average</label>
+            <input type="range" id="newAverage" min="0" max="100" value="0" disabled>
+            <span id="newAverageVal"></span>
+        </div>
     </div>
 
     <script>
-        document.getElementById('calculateBtn').addEventListener('click', () => {
-            const currentAverage = parseFloat(document.getElementById('currentAverage').value);
-            const testGrade = parseFloat(document.getElementById('testGrade').value);
-            const testWeight = parseFloat(document.getElementById('testWeight').value);
+        const currentAverageEl = document.getElementById('currentAverage');
+        const testGradeEl = document.getElementById('testGrade');
+        const testWeightEl = document.getElementById('testWeight');
+        const testGradeVal = document.getElementById('testGradeVal');
+        const testWeightVal = document.getElementById('testWeightVal');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultEl = document.getElementById('result');
+        const newAverageEl = document.getElementById('newAverage');
+        const newAverageVal = document.getElementById('newAverageVal');
 
-            if (isNaN(currentAverage) || isNaN(testGrade) || isNaN(testWeight)) {
-                document.getElementById('result').textContent = 'Please enter all three values.';
-                return;
-            }
+        testGradeEl.addEventListener('input', () => {
+            testGradeVal.textContent = testGradeEl.value;
+        });
 
-            if (testWeight < 0 || testWeight > 100) {
-                document.getElementById('result').textContent = 'Test weight must be between 0 and 100.';
+        testWeightEl.addEventListener('input', () => {
+            testWeightVal.textContent = testWeightEl.value;
+        });
+
+        calculateBtn.addEventListener('click', () => {
+            const currentAverage = parseFloat(currentAverageEl.value);
+            const testGrade = parseFloat(testGradeEl.value);
+            const testWeight = parseFloat(testWeightEl.value);
+
+            if (isNaN(currentAverage)) {
+                resultEl.textContent = 'Please enter your current grade average.';
                 return;
             }
 
             const currentWeight = 100 - testWeight;
+            
             const newAverage = ((currentAverage * currentWeight) + (testGrade * testWeight)) / 100;
+            const minAverage = (currentAverage * currentWeight) / 100;
+            const maxAverage = ((currentAverage * currentWeight) + (100 * testWeight)) / 100;
 
-            document.getElementById('result').textContent = `Your new grade average is: ${newAverage.toFixed(2)}`;
+            resultEl.textContent = `Your new grade average is: ${newAverage.toFixed(2)}`;
+            
+            newAverageEl.min = minAverage;
+            newAverageEl.max = maxAverage;
+            newAverageEl.value = newAverage;
+            newAverageVal.textContent = newAverage.toFixed(2);
         });
     </script>
 </body>
