@@ -4,11 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .app-link {
+            display: block;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .app-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .app-link:hover::before {
+            left: 100%;
+        }
+
+        .app-link:active {
+            transform: translateY(0);
+        }
+
+        @media (min-width: 500px) {
+            .app-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Apps</h1>
-    <a href="tictactoe.html">Play Tic Tac Toe</a>
-    <br><br>
-    <a href="grades.html">Grade Calculator</a>
+    <div class="container">
+        <h1>Apps</h1>
+        <div class="app-grid">
+            <a href="tictactoe.html" class="app-link">🎮 Tic Tac Toe</a>
+            <a href="grades.html" class="app-link">📊 Grade Calculator</a>
+        </div>
+    </div>
 </body>
 </html>
