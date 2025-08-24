@@ -84,7 +84,7 @@
             <input type="range" id="testWeight" min="1" max="100" value="20">
         </div>
         <div id="result"></div>
-        <div class="input-group">
+        <div class="input-group" id="newAverageContainer" style="display: none;">
             <input type="range" id="newAverage" min="0" max="100" value="0" disabled>
             <div style="display: flex; justify-content: space-between;">
                 <span id="newAverageMin"></span>
@@ -101,21 +101,24 @@
         const testGradeVal = document.getElementById('testGradeVal');
         const testWeightVal = document.getElementById('testWeightVal');
         const resultEl = document.getElementById('result');
+        const newAverageContainer = document.getElementById('newAverageContainer');
         const newAverageEl = document.getElementById('newAverage');
         const newAverageVal = document.getElementById('newAverageVal');
         const newAverageMin = document.getElementById('newAverageMin');
         const newAverageMax = document.getElementById('newAverageMax');
 
         function calculate() {
-            const currentAverage = parseFloat(currentAverageEl.value) || 0;
+            const currentAverage = parseFloat(currentAverageEl.value);
             const testGrade = parseFloat(testGradeEl.value);
             const testWeight = parseFloat(testWeightEl.value);
 
             if (isNaN(currentAverage)) {
                 resultEl.textContent = 'Please enter your current grade average.';
+                newAverageContainer.style.display = 'none';
                 return;
             }
 
+            newAverageContainer.style.display = 'block';
             const currentWeight = 100 - testWeight;
             
             const newAverage = ((currentAverage * currentWeight) + (testGrade * testWeight)) / 100;
