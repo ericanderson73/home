@@ -83,7 +83,6 @@
             <label for="testWeight">Test Weight (%): <span id="testWeightVal">50</span></label>
             <input type="range" id="testWeight" min="1" max="100" value="50">
         </div>
-        <button id="calculateBtn">Calculate</button>
         <div id="result"></div>
         <div class="input-group">
             <label for="newAverage">New Average</label>
@@ -98,20 +97,11 @@
         const testWeightEl = document.getElementById('testWeight');
         const testGradeVal = document.getElementById('testGradeVal');
         const testWeightVal = document.getElementById('testWeightVal');
-        const calculateBtn = document.getElementById('calculateBtn');
         const resultEl = document.getElementById('result');
         const newAverageEl = document.getElementById('newAverage');
         const newAverageVal = document.getElementById('newAverageVal');
 
-        testGradeEl.addEventListener('input', () => {
-            testGradeVal.textContent = testGradeEl.value;
-        });
-
-        testWeightEl.addEventListener('input', () => {
-            testWeightVal.textContent = testWeightEl.value;
-        });
-
-        calculateBtn.addEventListener('click', () => {
+        function calculate() {
             const currentAverage = parseFloat(currentAverageEl.value);
             const testGrade = parseFloat(testGradeEl.value);
             const testWeight = parseFloat(testWeightEl.value);
@@ -133,7 +123,22 @@
             newAverageEl.max = maxAverage;
             newAverageEl.value = newAverage;
             newAverageVal.textContent = newAverage.toFixed(2);
+        }
+
+        testGradeEl.addEventListener('input', () => {
+            testGradeVal.textContent = testGradeEl.value;
+            calculate();
         });
+
+        testWeightEl.addEventListener('input', () => {
+            testWeightVal.textContent = testWeightEl.value;
+            calculate();
+        });
+
+        currentAverageEl.addEventListener('input', calculate);
+
+        // Initial calculation
+        calculate();
     </script>
 </body>
 </html>
